@@ -1,5 +1,10 @@
+html {
+  
+}
+
 body {
-  background: #233047;
+  background: #BFE2F0;
+  transition: background .3s;
 }
 
 .container {
@@ -8,6 +13,10 @@ body {
 
 h1 {
   font-size: 2.2rem;
+}
+
+h1, label {
+  color: #3a687a;
 }
 
 .time-icon {

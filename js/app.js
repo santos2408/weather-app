@@ -1,3 +1,7 @@
+const body = document.querySelector('body')
+const weatherTitle = document.querySelector('[data-js="weather-title"]')
+const weatherLabel = document.querySelector('[data-js="weather-label"]')
+
 const cityForm = document.querySelector('[data-js="change-location"]')
 const cityNameContainer = document.querySelector('[data-js="city-name"]')
 const cityWeatherContainer = document.querySelector('[data-js="city-weather"]')
@@ -8,6 +12,7 @@ let timeImage = document.querySelector('[data-js="time"]')
 
 const getWeatherData = async inputValue => {
   const [{ Key, LocalizedName }] = await getCityData(inputValue)
+
   const [{ WeatherText, Temperature, WeatherIcon, IsDayTime }] = await getCityWeather(Key)
   return { LocalizedName, WeatherText, Temperature, WeatherIcon, IsDayTime }
 }
@@ -23,8 +28,21 @@ const insertWeatherInfoIntoDOM = (LocalizedName, WeatherText, Temperature) => {
   cityTemperatureContainer.textContent = Temperature.Metric.Value
 }
 
+const insertBackgroundColors = (bodyColor, textColor)  => {
+  body.style.background = bodyColor
+  weatherTitle.style.color = textColor
+  weatherLabel.style.color = textColor
+}
+
 const insertImagesIntoDOM = (IsDayTime, timeIcon) => {
-  IsDayTime ? timeImage.src = './src/day.svg' : timeImage.src = './src/night.svg'
+  if (IsDayTime) {
+    timeImage.src = './src/day.svg'
+    timeIconContainer.innerHTML = timeIcon
+    insertBackgroundColors('#BFE2F0', '#3a687a')
+    return
+  }
+  insertBackgroundColors('#414551', "#fff")
+  timeImage.src = './src/night.svg'
   timeIconContainer.innerHTML = timeIcon
 }
 
