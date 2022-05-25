@@ -6,13 +6,6 @@ const cityCard = document.querySelector(['[data-js="city-card"]'])
 const timeIconContainer = document.querySelector('[data-js="time-icon"]')
 let timeImage = document.querySelector('[data-js="time"]')
 
-// const getWeatherData = async inputValue => {
-//   const [{ Key, LocalizedName }] = await getCityData(inputValue)
-//   const [{ WeatherText, Temperature, WeatherIcon, IsDayTime }] = await getCityWeather(Key)
-//   // console.log([LocalizedName, WeatherText, Temperature, WeatherIcon, IsDayTime])
-//   return [LocalizedName, WeatherText, Temperature, WeatherIcon, IsDayTime]
-// }
-
 const getWeatherData = async inputValue => {
   const [{ Key, LocalizedName }] = await getCityData(inputValue)
   const [{ WeatherText, Temperature, WeatherIcon, IsDayTime }] = await getCityWeather(Key)
