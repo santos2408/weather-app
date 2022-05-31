@@ -1,69 +1,49 @@
 const body = document.querySelector('body')
 const weatherTitle = document.querySelector('[data-js="weather-title"]')
 const weatherLabel = document.querySelector('[data-js="weather-label"]')
-
 const cityForm = document.querySelector('[data-js="change-location"]')
 const cityNameContainer = document.querySelector('[data-js="city-name"]')
 const cityWeatherContainer = document.querySelector('[data-js="city-weather"]')
 const cityTemperatureContainer = document.querySelector('[data-js="city-temperature"]')
-const cityCard = document.querySelector(['[data-js="city-card"]'])
+const cityCard = document.querySelector('[data-js="city-card"]')
 const timeIconContainer = document.querySelector('[data-js="time-icon"]')
 let timeImage = document.querySelector('[data-js="time"]')
 
-const getWeatherData = async inputValue => {
-  const [{ Key, LocalizedName }] = await getCityData(inputValue)
+const getWeatherData = async cityName => {
+  const [{ Key, LocalizedName }] = await getCityData(cityName)
 
-  const [{ WeatherText, Temperature, WeatherIcon, IsDayTime }] = await getCityWeather(Key)
-  return { LocalizedName, WeatherText, Temperature, WeatherIcon, IsDayTime }
+  const [weatherData] = await getCityWeather(Key)
+  return { ...weatherData, LocalizedName }
 }
 
 const showCityCard = () => {
   const hasDisplayNoneClass = cityCard.classList.contains('d-none')
-  if (hasDisplayNoneClass) cityCard.classList.remove('d-none')
+  if (hasDisplayNoneClass) {
+    cityCard.classList.remove('d-none')
+  }
 }
 
-const insertWeatherInfoIntoDOM = (LocalizedName, WeatherText, Temperature) => {
-  cityNameContainer.textContent = LocalizedName
-  cityWeatherContainer.textContent = WeatherText
-  cityTemperatureContainer.textContent = Temperature.Metric.Value
-}
-
-const insertBackgroundColors = (bodyColor, textColor)  => {
+const changeBackgroundColors = ({ bodyColor, textColor })  => {
   body.style.background = bodyColor
   weatherTitle.style.color = textColor
   weatherLabel.style.color = textColor
 }
 
-const insertImagesIntoDOM = (IsDayTime, timeIcon) => {
-  if (IsDayTime) {
-    timeImage.src = './src/day.svg'
-    timeIconContainer.innerHTML = timeIcon
-    insertBackgroundColors('#BFE2F0', '#3a687a')
-    return
-  }
-  insertBackgroundColors('#414551', "#fff")
-  timeImage.src = './src/night.svg'
-  timeIconContainer.innerHTML = timeIcon
-}
-
-const getWeatherInfo = async event => {
+const showCityWeather = async event => {
   event.preventDefault()
 
-  const inputValue = event.target.city.value
-  const { 
-    LocalizedName,
-    WeatherText,
-    Temperature,
-    WeatherIcon, 
-    IsDayTime 
-  } = await getWeatherData(inputValue)
-  const timeIcon = `<img src="./src/icons/${WeatherIcon}.svg" />`
+  const cityName = event.target.city.value
+  const { LocalizedName, WeatherText, Temperature, WeatherIcon, IsDayTime }  = await getWeatherData(cityName)
 
-  showCityCard()
-  insertWeatherInfoIntoDOM(LocalizedName, WeatherText, Temperature)
-  insertImagesIntoDOM(IsDayTime, timeIcon)
+  cityNameContainer.textContent = LocalizedName
+  cityWeatherContainer.textContent = WeatherText
+  cityTemperatureContainer.textContent = Temperature.Metric.Value
+  timeImage.src = IsDayTime ? './src/day.svg' : './src/night.svg'
+  timeIconContainer.innerHTML = `<img src="./src/icons/${WeatherIcon}.svg" />`
 
+  changeBackgroundColors({ bodyColor: IsDayTime ? '#BFE2F0' : '#414551', textColor: IsDayTime ? '#3A687A' : "#FFFFFF" })
+  showCityCard()  
   cityForm.reset()
 }
 
-cityForm.addEventListener('submit', getWeatherInfo)
+cityForm.addEventListener('submit', showCityWeather)

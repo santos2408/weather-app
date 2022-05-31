@@ -11,14 +11,15 @@ const fetchData = async url => {
   try {
     const request = await fetch(url)
 
-    if (!request.ok) throw new Error ('Não foi possível obter os dados.')
+    if (!request.ok) {
+      throw new Error ('Não foi possível obter os dados.')
+    }
 
     return request.json()
-
   } catch ({ name, message }) {
     console.log(`${name}: ${message}`)
   }
 }
 
-const getCityData = cityName => cityData = fetchData(getCityUrl(cityName))
+const getCityData = cityName => fetchData(getCityUrl(cityName))
 const getCityWeather = cityKey => fetchData(getWeatherUrl(cityKey))
