@@ -30,6 +30,7 @@ Esse projeto está sendo desenvolvido com as seguintes tecnologias:
 - CSS
 - JavaScript
 
+<br>
 ## 🚧 Projeto:
 
 Link do Projeto: [Weather App](https://rogersanttoss-weather-app.netlify.app/)
@@ -38,6 +39,7 @@ Link do Projeto: [Weather App](https://rogersanttoss-weather-app.netlify.app/)
 
 Comunidade: [Codelândia](https://discord.gg/DvpRxMWW) -->
 
+<br>
 ## :memo: Licença
 
 Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](./.github/LICENSE) para mais detalhes.
