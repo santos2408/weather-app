@@ -34,6 +34,7 @@ const showCityWeather = async event => {
 
   const cityName = event.target.city.value
   const { LocalizedName, WeatherText, Temperature, WeatherIcon, IsDayTime } = await getWeatherData(cityName)
+  console.log(getWeatherData(cityName))
 
   cityNameContainer.textContent = LocalizedName
   cityWeatherContainer.textContent = WeatherText
