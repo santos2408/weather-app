@@ -32,7 +32,7 @@ Esse projeto está sendo desenvolvido com as seguintes tecnologias:
 
 ## 🚧 Projeto:
 
-<!-- Link do Projeto: [Weather App](https://rogersanttoss-weather-app.netlify.app) -->
+Link do Projeto: [Weather App](https://rogersanttoss-weather-app.netlify.app/)
 
 <!-- ## 🎨 Inspiração:
 
