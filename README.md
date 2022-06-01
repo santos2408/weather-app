@@ -12,13 +12,13 @@
   <a href="#memo-licença">Licença</a>
 </p>
 
-<p align="center">
+<!-- <p align="center">
   <img  src="https://img.shields.io/static/v1?label=license&message=MIT&color=5454D4&labelColor=3B3B89" alt="License">
-  
+
   <img src="https://img.shields.io/github/forks/santos2408/digital-agency-website?color=5454D4&label=Forks" alt="Forks">
 
   <img src="https://img.shields.io/github/stars/santos2408/digital-agency-website?color=5454D4&label=Stars" alt="Stars">
-</p>
+</p> -->
 
 <br>
 
