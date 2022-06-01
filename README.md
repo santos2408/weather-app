@@ -31,6 +31,7 @@ Esse projeto está sendo desenvolvido com as seguintes tecnologias:
 - JavaScript
 
 <br>
+
 ## 🚧 Projeto:
 
 Link do Projeto: [Weather App](https://rogersanttoss-weather-app.netlify.app/)
