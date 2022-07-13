@@ -11,8 +11,8 @@ let timeImage = document.querySelector('[data-js="time"]')
 
 const getWeatherData = async cityName => {
   const [{ Key, LocalizedName }] = await getCityData(cityName)
-
   const [weatherData] = await getCityWeather(Key)
+  
   return { ...weatherData, LocalizedName }
 }
 
@@ -46,24 +46,30 @@ const showLocalStorageCity = async () => {
   }
 }
 
-const showCityWeather = async event => {
-  event.preventDefault()
-
-  const cityName = event.target.city.value
+const showCityWeatherInfo = async cityName => {
   const { LocalizedName, WeatherText, Temperature, WeatherIcon, IsDayTime } = await getWeatherData(cityName)
 
   cityNameContainer.textContent = LocalizedName
   cityWeatherContainer.textContent = WeatherText
   cityTemperatureContainer.textContent = Temperature.Metric.Value
   timeImage.src = IsDayTime ? './src/day.svg' : './src/night.svg'
-  timeIconContainer.innerHTML = `<img src="./src/icons/${WeatherIcon}.svg" />`
-
+  timeIconContainer.innerHTML = `<img src="./src/icons/${WeatherIcon}.svg" />`  
+  
   changeBackgroundColors({ bodyColor: IsDayTime ? '#BFE2F0' : '#414551', textColor: IsDayTime ? '#3A687A' : "#FFFFFF" })
-  showCityCard()
+}
+
+const handleCityForm = event => {
+  event.preventDefault()
+
+  const cityName = event.target.city.value
+
   localStorage.setItem('city', cityName)
+
+  showCityWeatherInfo(cityName)
+  showCityCard()
   cityForm.reset()
 }
 
-cityForm.addEventListener('submit', showCityWeather)
+cityForm.addEventListener('submit', handleCityForm)
 showLocalStorageCity()
 
