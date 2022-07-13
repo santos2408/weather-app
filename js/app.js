@@ -12,7 +12,7 @@ let timeImage = document.querySelector('[data-js="time"]')
 const getWeatherData = async cityName => {
   const [{ Key, LocalizedName }] = await getCityData(cityName)
   const [weatherData] = await getCityWeather(Key)
-  
+
   return { ...weatherData, LocalizedName }
 }
 
@@ -72,4 +72,3 @@ const handleCityForm = event => {
 
 cityForm.addEventListener('submit', handleCityForm)
 showLocalStorageCity()
-
