@@ -33,15 +33,7 @@ const showLocalStorageCity = async () => {
   const city = localStorage.getItem('city')
 
   if (city) {
-    const { LocalizedName, WeatherText, Temperature, WeatherIcon, IsDayTime } = await getWeatherData(city)
-  
-    cityNameContainer.textContent = LocalizedName
-    cityWeatherContainer.textContent = WeatherText
-    cityTemperatureContainer.textContent = Temperature.Metric.Value
-    timeImage.src = IsDayTime ? './src/day.svg' : './src/night.svg'
-    timeIconContainer.innerHTML = `<img src="./src/icons/${WeatherIcon}.svg" />`
-  
-    changeBackgroundColors({ bodyColor: IsDayTime ? '#BFE2F0' : '#414551', textColor: IsDayTime ? '#3A687A' : "#FFFFFF" })
+    showCityWeatherInfo(city)
     showCityCard()
   }
 }
