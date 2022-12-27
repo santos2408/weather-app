@@ -16,6 +16,18 @@ const getWeatherData = async cityName => {
   return { ...weatherData, LocalizedName }
 }
 
+const showCityWeatherInfo = async cityName => {
+  const { LocalizedName, WeatherText, Temperature, WeatherIcon, IsDayTime } = await getWeatherData(cityName)
+
+  cityNameContainer.textContent = LocalizedName
+  cityWeatherContainer.textContent = WeatherText
+  cityTemperatureContainer.textContent = Temperature.Metric.Value
+  timeImage.src = IsDayTime ? './src/day.svg' : './src/night.svg'
+  timeIconContainer.innerHTML = `<img src="./src/icons/${WeatherIcon}.svg" />`  
+  
+  changeBackgroundColors({ bodyColor: IsDayTime ? '#BFE2F0' : '#414551', textColor: IsDayTime ? '#3A687A' : "#FFFFFF" })
+}
+
 const showCityCard = () => {
   const hasDisplayNoneClass = cityCard.classList.contains('d-none')
   if (hasDisplayNoneClass) {
@@ -36,18 +48,6 @@ const showLocalStorageCity = async () => {
     showCityWeatherInfo(city)
     showCityCard()
   }
-}
-
-const showCityWeatherInfo = async cityName => {
-  const { LocalizedName, WeatherText, Temperature, WeatherIcon, IsDayTime } = await getWeatherData(cityName)
-
-  cityNameContainer.textContent = LocalizedName
-  cityWeatherContainer.textContent = WeatherText
-  cityTemperatureContainer.textContent = Temperature.Metric.Value
-  timeImage.src = IsDayTime ? './src/day.svg' : './src/night.svg'
-  timeIconContainer.innerHTML = `<img src="./src/icons/${WeatherIcon}.svg" />`  
-  
-  changeBackgroundColors({ bodyColor: IsDayTime ? '#BFE2F0' : '#414551', textColor: IsDayTime ? '#3A687A' : "#FFFFFF" })
 }
 
 const handleCityForm = event => {
