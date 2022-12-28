@@ -26,10 +26,12 @@ const showCityWeatherInfo = async cityName => {
   timeIconContainer.innerHTML = `<img src="./src/icons/${WeatherIcon}.svg" />`  
   
   changeBackgroundColors({ bodyColor: IsDayTime ? '#BFE2F0' : '#414551', textColor: IsDayTime ? '#3A687A' : "#FFFFFF" })
+  showCityCard()
 }
 
 const showCityCard = () => {
   const hasDisplayNoneClass = cityCard.classList.contains('d-none')
+  
   if (hasDisplayNoneClass) {
     cityCard.classList.remove('d-none')
   }
@@ -46,7 +48,6 @@ const showLocalStorageCity = async () => {
 
   if (city) {
     showCityWeatherInfo(city)
-    showCityCard()
   }
 }
 
@@ -58,7 +59,6 @@ const handleCityForm = event => {
   localStorage.setItem('city', cityName)
 
   showCityWeatherInfo(cityName)
-  showCityCard()
   cityForm.reset()
 }
 
